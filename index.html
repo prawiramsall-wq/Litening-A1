@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Listening Quiz</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+.question{
+    margin-bottom: 25px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+button{
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+#result{
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+audio{
+    width:100%;
+    margin-bottom:20px;
+}
+</style>
+</head>
+<body>
+
+<h1>Listening Exercise</h1>
+
+<p>Listen to the audio carefully and answer the questions.</p>
+
+<audio controls>
+    <source src="https://drive.google.com/uc?export=download&id=1BAP3XKTAN1haToIb8ocnmcVhF0s8tDJB" type="audio/mpeg">
+    Browser Anda tidak mendukung audio.
+</audio>
+
+<form id="quizForm">
+
+<div class="question">
+<h3>1. What is the speaker talking about?</h3>
+<label><input type="radio" name="q1" value="a"> A yoga class</label><br>
+<label><input type="radio" name="q1" value="b"> A football match</label><br>
+<label><input type="radio" name="q1" value="c"> A music concert</label><br>
+<label><input type="radio" name="q1" value="d"> A cooking lesson</label>
+</div>
+
+<div class="question">
+<h3>2. When does the class take place?</h3>
+<label><input type="radio" name="q2" value="a"> Monday</label><br>
+<label><input type="radio" name="q2" value="b"> Tuesday</label><br>
+<label><input type="radio" name="q2" value="c"> Wednesday</label><br>
+<label><input type="radio" name="q2" value="d"> Friday</label>
+</div>
+
+<div class="question">
+<h3>3. What time does the class start?</h3>
+<label><input type="radio" name="q3" value="a"> 12.30 p.m.</label><br>
+<label><input type="radio" name="q3" value="b"> 1.00 p.m.</label><br>
+<label><input type="radio" name="q3" value="c"> 1.30 p.m.</label><br>
+<label><input type="radio" name="q3" value="d"> 2.00 p.m.</label>
+</div>
+
+<div class="question">
+<h3>4. Where is the class held?</h3>
+<label><input type="radio" name="q4" value="a"> Meeting Room 5</label><br>
+<label><input type="radio" name="q4" value="b"> Meeting Room 6</label><br>
+<label><input type="radio" name="q4" value="c"> Meeting Room 7</label><br>
+<label><input type="radio" name="q4" value="d"> Meeting Room 8</label>
+</div>
+
+<div class="question">
+<h3>5. How much does the course cost?</h3>
+<label><input type="radio" name="q5" value="a"> £5</label><br>
+<label><input type="radio" name="q5" value="b"> £8</label><br>
+<label><input type="radio" name="q5" value="c"> £10</label><br>
+<label><input type="radio" name="q5" value="d"> £12</label>
+</div>
+
+<div class="question">
+<h3>6. How many classes are included?</h3>
+<label><input type="radio" name="q6" value="a"> 2</label><br>
+<label><input type="radio" name="q6" value="b"> 3</label><br>
+<label><input type="radio" name="q6" value="c"> 4</label><br>
+<label><input type="radio" name="q6" value="d"> 5</label>
+</div>
+
+<div class="question">
+<h3>7. How long is each class?</h3>
+<label><input type="radio" name="q7" value="a"> 15 minutes</label><br>
+<label><input type="radio" name="q7" value="b"> 20 minutes</label><br>
+<label><input type="radio" name="q7" value="c"> 30 minutes</label><br>
+<label><input type="radio" name="q7" value="d"> 45 minutes</label>
+</div>
+
+<div class="question">
+<h3>8. What should participants bring?</h3>
+<label><input type="radio" name="q8" value="a"> Yoga mat</label><br>
+<label><input type="radio" name="q8" value="b"> Comfortable clothes</label><br>
+<label><input type="radio" name="q8" value="c"> Towel</label><br>
+<label><input type="radio" name="q8" value="d"> Water bottle</label>
+</div>
+
+<div class="question">
+<h3>9. Who provides the yoga mats?</h3>
+<label><input type="radio" name="q9" value="a"> Sam</label><br>
+<label><input type="radio" name="q9" value="b"> The students</label><br>
+<label><input type="radio" name="q9" value="c"> Divya</label><br>
+<label><input type="radio" name="q9" value="d"> The school</label>
+</div>
+
+<div class="question">
+<h3>10. How can people join?</h3>
+<label><input type="radio" name="q10" value="a"> Call Sam</label><br>
+<label><input type="radio" name="q10" value="b"> Visit Room 7</label><br>
+<label><input type="radio" name="q10" value="c"> Write to Sam</label><br>
+<label><input type="radio" name="q10" value="d"> Ask Divya directly</label>
+</div>
+
+<button type="button" onclick="checkQuiz()">Submit</button>
+
+</form>
+
+<div id="result"></div>
+
+<script>
+function checkQuiz(){
+
+const answers = {
+q1:"a",
+q2:"b",
+q3:"c",
+q4:"c",
+q5:"c",
+q6:"c",
+q7:"c",
+q8:"b",
+q9:"c",
+q10:"c"
+};
+
+let score = 0;
+
+for(let q in answers){
+const selected =
+document.querySelector(`input[name="${q}"]:checked`);
+
+if(selected && selected.value === answers[q]){
+score++;
+}
+}
+
+let percentage = (score/10)*100;
+
+document.getElementById("result").innerHTML =
+`Your Score: ${score}/10 (${percentage}%)`;
+}
+</script>
+
+</body>
+</html>
